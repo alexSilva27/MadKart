@@ -14,12 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data:
     TilesMetadata:
-    - Prefab: {fileID: 919132149155446097, guid: e4129c6bb5a542a42bb91265a529b2b7,
+    - Prefab: {fileID: 919132149155446097, guid: d8f9f1162ab50bf47a0f60d7d34bb167,
         type: 3}
-      TileType: 6
-    - Prefab: {fileID: 919132149155446097, guid: f7757b3a09f41c74eb0dcbf54cc48a82,
-        type: 3}
-      TileType: 7
+      TileType: 12
     - Prefab: {fileID: 919132149155446097, guid: de3da03404d6c0c4ba67e55d5f26fb5e,
         type: 3}
       TileType: 19
+    - Prefab: {fileID: 919132149155446097, guid: f7757b3a09f41c74eb0dcbf54cc48a82,
+        type: 3}
+      TileType: 7
+    - Prefab: {fileID: 919132149155446097, guid: e4129c6bb5a542a42bb91265a529b2b7,
+        type: 3}
+      TileType: 6
+    - Prefab: {fileID: 919132149155446097, guid: f0c25ebc936ed0f428472b859d47f3af,
+        type: 3}
+      TileType: 20
+    - Prefab: {fileID: 919132149155446097, guid: 3ce451270a1a3ec4ab37d96b07bb79b6,
+        type: 3}
+      TileType: 21

@@ -8,7 +8,7 @@ namespace MadKart
     {
         public void Start()
         {
-            string mapJson = File.ReadAllText(Application.persistentDataPath + "/test.txt");
+            string mapJson = File.ReadAllText(Application.persistentDataPath + "/test.json");
             Map map = JsonConvert.DeserializeObject<Map>(mapJson);
             map.Instantiate();
         }

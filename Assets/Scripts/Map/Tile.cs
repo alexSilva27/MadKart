@@ -19,7 +19,7 @@ namespace MadKart
         public (int X, int Y, int Z) Position { get; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public TileRotation Rotation { get; } // left hand rule with the finger being Y positive axis.
+        public TileRotation Rotation { get; } // left hand rule with the thumb representing the UP axis.
 
         [JsonIgnore] public GameObject Instance { get; private set; }
 

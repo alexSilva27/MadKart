@@ -7,7 +7,7 @@ namespace MadKart
     public class MapMetadata : ScriptableObject
     {
         [Serializable]
-        private class Data
+        private struct Data
         {
             public TileMetadata[] TilesMetadata;
         }

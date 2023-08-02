@@ -21,23 +21,14 @@ namespace MadKart
         [JsonConverter(typeof(StringEnumConverter))]
         public TileRotation Rotation { get; } // left hand rule with the thumb representing the UP axis.
 
-        [JsonIgnore] public GameObject Instance { get; private set; }
+        [JsonIgnore] public TileController Controller { get; private set; }
 
         public void Instantiate()
         {
             TileMetadata tileMetadata = MapMetadata.Metadata.GetTileMetadata(TileType);
-            Vector3 position = new Vector3(Position.X, Position.Y / 2f, Position.Z);
-            Instance = GameObject.Instantiate(tileMetadata.Prefab, position, Quaternion.identity);
-
-            float angle = Rotation switch
-            {
-                TileRotation.MinusNinetyDegrees => -90f,
-                TileRotation.NinetyDegrees => 90f,
-                TileRotation.OneHundredEightyDegrees => 180f,
-                _ => 0f,
-            };
-            Vector3 rotationPivot = position + new Vector3(0.5f, 0f, 0.5f);
-            Instance.transform.RotateAround(rotationPivot, Vector3.up, angle);
+            
+            Controller = GameObject.Instantiate(tileMetadata.Prefab).GetComponent<TileController>();
+            Controller.Tile = this;
         }
     }
 }

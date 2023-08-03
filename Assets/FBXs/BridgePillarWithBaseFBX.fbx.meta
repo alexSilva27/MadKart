@@ -3,7 +3,17 @@ guid: 3ce451270a1a3ec4ab37d96b07bb79b6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlueDebug
+    second: {fileID: 2100000, guid: a1b72d026248d5947a9ed52c77c8806a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RedDebug
+    second: {fileID: 2100000, guid: 06945ca272faa9843ac6cc4971042aa1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -37,7 +47,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1

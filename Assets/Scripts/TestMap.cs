@@ -8,9 +8,11 @@ namespace MadKart
     {
         public void Start()
         {
-            string mapJson = File.ReadAllText(Application.persistentDataPath + "/test.json");
-            Map map = JsonConvert.DeserializeObject<Map>(mapJson);
-            map.Instantiate();
+            Application.targetFrameRate = 60;
+
+            //string mapJson = File.ReadAllText(Application.persistentDataPath + "/test.json");
+            //Map map = JsonConvert.DeserializeObject<Map>(mapJson);
+            //map.Instantiate();
         }
     }
 }

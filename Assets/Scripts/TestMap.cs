@@ -1,18 +1,32 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MadKart
 {
     public class TestMap : MonoBehaviour
     {
+        [SerializeField] private GameObject _mapRoot;
+
         public void Start()
         {
             Application.targetFrameRate = 60;
 
-            //string mapJson = File.ReadAllText(Application.persistentDataPath + "/test.json");
-            //Map map = JsonConvert.DeserializeObject<Map>(mapJson);
-            //map.Instantiate();
+            //string mapJson = File.ReadAllText(Application.persistentDataPath + "/myFirstMap.json");
+            string mapJson = Resources.Load<TextAsset>("Maps/myFirstMap").text;
+            Map map = JsonConvert.DeserializeObject<Map>(mapJson);
+            map.Instantiate();
+
+            foreach(var obj in SceneManager.GetActiveScene().GetRootGameObjects())
+            {
+                if (obj.GetComponent<TileController>() != null)
+                {
+                    obj.transform.SetParent(_mapRoot.transform, true);
+                }
+            }
+
+            _mapRoot.transform.localScale *= 27f;
         }
     }
 }

@@ -68,6 +68,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: BridgeEnd
       objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: de3da03404d6c0c4ba67e55d5f26fb5e,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 916ad3693c3861d48b2acf9d3bd03f42,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

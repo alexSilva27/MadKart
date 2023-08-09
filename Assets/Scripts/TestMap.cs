@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,8 +10,6 @@ namespace MadKart
 
         public void Start()
         {
-            Application.targetFrameRate = 60;
-
             //string mapJson = File.ReadAllText(Application.persistentDataPath + "/myFirstMap.json");
             string mapJson = Resources.Load<TextAsset>("Maps/myFirstMap").text;
             Map map = JsonConvert.DeserializeObject<Map>(mapJson);
@@ -26,7 +23,7 @@ namespace MadKart
                 }
             }
 
-            _mapRoot.transform.localScale *= 27f;
+            _mapRoot.transform.localScale *= 20f;
         }
     }
 }

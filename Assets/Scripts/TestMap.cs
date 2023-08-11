@@ -23,7 +23,7 @@ namespace MadKart
                 }
             }
 
-            _mapRoot.transform.localScale *= 20f;
+            _mapRoot.transform.localScale *= 16f;
         }
     }
 }

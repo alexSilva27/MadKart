@@ -23,11 +23,11 @@ namespace MadKart
 
         [JsonIgnore] public TileController Controller { get; private set; }
 
-        public void Instantiate()
+        public void Instantiate(Transform rootTransform)
         {
             TileMetadata tileMetadata = MapMetadata.Metadata.GetTileMetadata(TileType);
             
-            Controller = GameObject.Instantiate(tileMetadata.Prefab).GetComponent<TileController>();
+            Controller = GameObject.Instantiate(tileMetadata.Prefab, rootTransform, false).GetComponent<TileController>();
             Controller.Tile = this;
         }
     }

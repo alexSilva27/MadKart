@@ -9,6 +9,7 @@ namespace MadKart
         private struct SerializedData
         {
             public TileType TileType;
+            public MeshCollider RoadNonConvexMeshCollider;
         }
 
         [SerializeField]
@@ -21,13 +22,13 @@ namespace MadKart
             {
                 if (_tile == null)
                 {
-                    int positionX = (int) Math.Round(transform.position.x);
-                    int positionY = (int) Math.Round(transform.position.y * 2f);
-                    int positionZ = (int) Math.Round(transform.position.z);
+                    int positionX = (int) Math.Round(transform.localPosition.x);
+                    int positionY = (int) Math.Round(transform.localPosition.y * 2f);
+                    int positionZ = (int) Math.Round(transform.localPosition.z);
                     (int X, int Y, int Z) position = (positionX, positionY, positionZ);
 
                     TileRotation rotation;
-                    float angle = Vector3.SignedAngle(Vector3.right, transform.right, Vector3.up);
+                    float angle = Vector3.SignedAngle(transform.parent.right, transform.right, Vector3.up);
 
                     if (Mathf.Approximately(angle, -90f))
                     {
@@ -59,8 +60,8 @@ namespace MadKart
             {
                 _tile = value;
 
-                transform.position = new Vector3(_tile.Position.X, _tile.Position.Y / 2f, _tile.Position.Z);
-                transform.rotation = Quaternion.identity;
+                transform.localPosition = new Vector3(_tile.Position.X, _tile.Position.Y / 2f, _tile.Position.Z);
+                transform.localRotation = Quaternion.identity;
 
                 float angle = _tile.Rotation switch
                 {
@@ -69,9 +70,16 @@ namespace MadKart
                     TileRotation.OneHundredEightyDegrees => 180f,
                     _ => 0f,
                 };
-                Vector3 rotationPivot = transform.position + new Vector3(0.5f, 0f, 0.5f);
-                transform.RotateAround(rotationPivot, Vector3.up, angle);
+                Vector3 rotationPivot = transform.TransformPoint(new Vector3(0.5f, 0f, 0.5f));
+                transform.RotateAround(rotationPivot, transform.up, angle);
+
+                if (_serializedData.RoadNonConvexMeshCollider != null)
+                {
+                    MeshColliderData = new MeshColliderData(_serializedData.RoadNonConvexMeshCollider);
+                }
             }
         }
+
+        public MeshColliderData MeshColliderData { get; private set; }
     }
 }

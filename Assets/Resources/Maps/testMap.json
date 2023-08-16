@@ -1,0 +1,427 @@
+{
+  "Tiles": [
+    {
+      "TileType": "BridgeAscending1",
+      "Position": {
+        "Item1": 0,
+        "Item2": 0,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgeStraight",
+      "Position": {
+        "Item1": 1,
+        "Item2": 1,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgeStraight",
+      "Position": {
+        "Item1": 2,
+        "Item2": 1,
+        "Item3": -6
+      },
+      "Rotation": "MinusNinetyDegrees"
+    },
+    {
+      "TileType": "BridgeSmallCurve",
+      "Position": {
+        "Item1": 2,
+        "Item2": 1,
+        "Item3": -5
+      },
+      "Rotation": "MinusNinetyDegrees"
+    },
+    {
+      "TileType": "BridgeAscending1",
+      "Position": {
+        "Item1": 1,
+        "Item2": 0,
+        "Item3": -5
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgeStraight",
+      "Position": {
+        "Item1": 0,
+        "Item2": 0,
+        "Item3": -5
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgeSmallCurve",
+      "Position": {
+        "Item1": -1,
+        "Item2": 0,
+        "Item3": -5
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgeSmallCurve",
+      "Position": {
+        "Item1": -1,
+        "Item2": 0,
+        "Item3": -4
+      },
+      "Rotation": "MinusNinetyDegrees"
+    },
+    {
+      "TileType": "BridgeSmallCurve",
+      "Position": {
+        "Item1": -2,
+        "Item2": 0,
+        "Item3": -4
+      },
+      "Rotation": "OneHundredEightyDegrees"
+    },
+    {
+      "TileType": "BridgeStraight",
+      "Position": {
+        "Item1": -1,
+        "Item2": 0,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgeStraight",
+      "Position": {
+        "Item1": -2,
+        "Item2": 0,
+        "Item3": -5
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgeStraight",
+      "Position": {
+        "Item1": -2,
+        "Item2": 0,
+        "Item3": -6
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 0,
+        "Item2": -1,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": -1,
+        "Item2": -1,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": -2,
+        "Item2": -1,
+        "Item3": -7
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": -2,
+        "Item2": -1,
+        "Item3": -6
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": -2,
+        "Item2": -1,
+        "Item3": -5
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": -1,
+        "Item2": -1,
+        "Item3": -4
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": -1,
+        "Item2": -1,
+        "Item3": -5
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 0,
+        "Item2": -1,
+        "Item3": -5
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 1,
+        "Item2": -1,
+        "Item3": -5
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 2,
+        "Item2": 0,
+        "Item3": -5
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 2,
+        "Item2": 0,
+        "Item3": -6
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 2,
+        "Item2": 0,
+        "Item3": -7
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 2,
+        "Item2": 0,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 1,
+        "Item2": 0,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": 0,
+        "Item2": -2,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": 1,
+        "Item2": -2,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": 2,
+        "Item2": -2,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": -1,
+        "Item2": -2,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": -1,
+        "Item2": -2,
+        "Item3": -4
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": 1,
+        "Item2": -2,
+        "Item3": -5
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": 2,
+        "Item2": -2,
+        "Item3": -5
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": 0,
+        "Item2": -2,
+        "Item3": -5
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": 2,
+        "Item2": -2,
+        "Item3": -6
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": 2,
+        "Item2": -2,
+        "Item3": -7
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": -2,
+        "Item2": -2,
+        "Item3": -7
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": -2,
+        "Item2": -2,
+        "Item3": -6
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": -2,
+        "Item2": -2,
+        "Item3": -5
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": -1,
+        "Item2": -2,
+        "Item3": -5
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 2,
+        "Item2": -1,
+        "Item3": -5
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 2,
+        "Item2": -1,
+        "Item3": -6
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 2,
+        "Item2": -1,
+        "Item3": -7
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 2,
+        "Item2": -1,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 1,
+        "Item2": -1,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgeSmallCurve",
+      "Position": {
+        "Item1": -2,
+        "Item2": 0,
+        "Item3": -7
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgeSmallCurve",
+      "Position": {
+        "Item1": 2,
+        "Item2": 1,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    }
+  ]
+}

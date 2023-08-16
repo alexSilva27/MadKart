@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace MadKart
 {
@@ -11,9 +12,9 @@ namespace MadKart
 
         public List<Tile> Tiles { get; }
 
-        public void Instantiate()
+        public void Instantiate(Transform rootTransform)
         {
-            Tiles.ForEach(x => x.Instantiate());
+            Tiles.ForEach(x => x.Instantiate(rootTransform));
         }
     }
 }

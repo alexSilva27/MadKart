@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5834528624202642586
 Transform:
   m_ObjectHideFlags: 0
@@ -105,8 +105,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.12350028, z: 0.1250292}
-  m_Center: {x: 0.5, y: 0.011750136, z: 0.1879808}
+  m_Size: {x: 1, y: 0.12350028, z: 0.14498675}
+  m_Center: {x: 0.5, y: 0.011750136, z: 0.19795957}
 --- !u!65 &2609958584959071645
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -126,8 +126,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.12350028, z: 0.12530184}
-  m_Center: {x: 0.5, y: 0.011750136, z: 0.813717}
+  m_Size: {x: 1, y: 0.12350028, z: 0.1471982}
+  m_Center: {x: 0.5, y: 0.011750136, z: 0.8027688}
 --- !u!1001 &7381338572923281232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -198,6 +198,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e4129c6bb5a542a42bb91265a529b2b7,
         type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e4129c6bb5a542a42bb91265a529b2b7,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -224,6 +229,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2269186596125650209}
   m_SourcePrefab: {fileID: 100100000, guid: e4129c6bb5a542a42bb91265a529b2b7, type: 3}
+--- !u!64 &5299361947831380312 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 3451118302482216456, guid: e4129c6bb5a542a42bb91265a529b2b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7381338572923281232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7054168840359803067 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e4129c6bb5a542a42bb91265a529b2b7,
@@ -250,3 +261,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializedData:
     TileType: 6
+    RoadNonConvexMeshCollider: {fileID: 5299361947831380312}

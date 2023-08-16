@@ -26,10 +26,14 @@ namespace MadKart
             var scene = EditorSceneManager.GetActiveScene();
             foreach (GameObject obj in scene.GetRootGameObjects())
             {
-                TileController tileController = obj.GetComponent<TileController>();
-                if (tileController != null)
+                TileController[] tilesController = obj.GetComponentsInChildren<TileController>(false);
+
+                foreach (TileController tileController in tilesController)
                 {
-                    tiles.Add(tileController.Tile);
+                    if (tileController.gameObject.activeInHierarchy)
+                    {
+                        tiles.Add(tileController.Tile);
+                    }
                 }
             }
 

@@ -6,7 +6,7 @@ namespace MadKart
 {
     public class KartController : MonoBehaviour
     {
-        #region Private fields & Properties
+        #region Private fields
 
         [Serializable]
         private struct SerializedData
@@ -14,6 +14,7 @@ namespace MadKart
             [Header("Physics settings")]
             public LayerMask DrivableSurfacesLayer;
             public Rigidbody RigidBody;
+            public SphereCollider KartCollider;
             public float RadiusForOverlapSphere;
 
             // motor...
@@ -25,10 +26,11 @@ namespace MadKart
 
             // steering...
             public float MaxSteeringAngle;
-            public float SteeringAngleChangeDampTime;
+            public float SteeringOnAngleChangeDampTime;
+            public float SteeringOffAngleChangeDampTime;
 
             [Header("Visual settings")]
-            public Transform KartVisual;
+            public Transform KartVisualTopLevelTransform;
             public Transform FrontLeftWheelSteering;
             public Transform FrontRightWheelSteering;
             public Transform FrontLeftWheelRotation;
@@ -46,12 +48,18 @@ namespace MadKart
         private readonly Collider[] _results = new Collider[256];
         private Vector3 _lastKartVisualPosition;
         private Quaternion _lastKartVisualRotation;
+        private Quaternion _lastKartTargetVisualRotation;
         private Vector3 _smoothDampVelocity;
-        private Vector3 _lastRigidBodyToContactPoint;
+        private Vector3 _lastSurfaceNormal; // last surface normal when the kart was grounded...
         private float _lastAllowedMaxSpeed;
+        private bool _isGrounded;
         private float _steeringAngle;
 
-        private Rigidbody RigidBody => _serializedData.RigidBody;
+        #endregion
+
+        #region Public properties
+
+        public Rigidbody RigidBody => _serializedData.RigidBody;
 
         #endregion
 
@@ -63,10 +71,12 @@ namespace MadKart
 
             _smoothDampVelocity = Vector3.zero;
             _steeringAngle = 0f;
+            _isGrounded = false;
             _lastAllowedMaxSpeed = _serializedData.MaxSpeedHorizontalSurface;
-            _lastRigidBodyToContactPoint = Vector3.up * -0.5f;
+            _lastSurfaceNormal = Vector3.up;
             _lastKartVisualRotation = Quaternion.identity;
-            _lastKartVisualPosition = RigidBody.position + _lastRigidBodyToContactPoint;
+            _lastKartTargetVisualRotation = Quaternion.identity;
+            _lastKartVisualPosition = RigidBody.position - _lastSurfaceNormal * _serializedData.KartCollider.radius;
         }
 
         private void FixedUpdate()
@@ -82,17 +92,31 @@ namespace MadKart
 
             int collidersHitCount = Physics.OverlapSphereNonAlloc(rigidBodyPosition,
                 _serializedData.RadiusForOverlapSphere, _results, _serializedData.DrivableSurfacesLayer.value);
-            bool isGrounded = collidersHitCount > 0;
+            _isGrounded = collidersHitCount > 0;
 
             // Debug.Log(_isGrounded);
-            if (isGrounded)
+            if (_isGrounded)
             {
                 float nearestDistance = float.MaxValue;
                 Vector3 contactPoint = default;
 
                 for (int i = 0; i < collidersHitCount; i++)
                 {
-                    Vector3 colliderClosestPoint = _results[i].ClosestPoint(rigidBodyPosition);
+                    Collider collider = _results[i];
+                    Vector3 colliderClosestPoint = default;
+
+                    if (collider is MeshCollider meshCollider && !meshCollider.convex)
+                    {
+                        // unity Collider.ClosesPoint() does not work for non convex mesh colliders; so we have implemented our own implementation...
+                        TileController tile = meshCollider.GetComponent<TileController>();
+                        MeshColliderData colliderData = tile.MeshColliderData;
+                        colliderClosestPoint = colliderData.ClosestPoint(in rigidBodyPosition);
+                    }
+                    else
+                    {
+                        colliderClosestPoint = collider.ClosestPoint(rigidBodyPosition);
+                    }
+
                     float distanceToCollider = (rigidBodyPosition - colliderClosestPoint).magnitude;
 
                     if (distanceToCollider < nearestDistance)
@@ -102,36 +126,43 @@ namespace MadKart
                     }
                 }
 
-                _lastRigidBodyToContactPoint = contactPoint - rigidBodyPosition;
-                Vector3 surfaceNormal = (-_lastRigidBodyToContactPoint).normalized;
+                Debug.Log((rigidBodyPosition - contactPoint).magnitude);
+
+                if ((rigidBodyPosition - contactPoint).magnitude > _serializedData.RadiusForOverlapSphere)
+                {
+                    Debug.LogError("Something is wrong with Physics.OverlapSphereNonAlloc sphere radius or" +
+                        "MeshColliderData.ClosestPoint()");
+                }
+
+                _lastSurfaceNormal = (rigidBodyPosition - contactPoint).normalized;
 
                 // depending on the surface normal, we have different max speeds...
-                float newAllowedMaxSpeedRatio = Mathf.Abs(Vector3.Cross(surfaceNormal, Vector3.up).magnitude);
+                float newAllowedMaxSpeedRatio = Mathf.Abs(Vector3.Cross(_lastSurfaceNormal, Vector3.up).magnitude);
                 float newAllowedMaxSpeed = Mathf.Lerp(_serializedData.MaxSpeedHorizontalSurface,
                     _serializedData.MaxSpeedVerticalSurface, newAllowedMaxSpeedRatio);
                 _lastAllowedMaxSpeed = Mathf.Lerp(_lastAllowedMaxSpeed, newAllowedMaxSpeed,
                     Time.fixedDeltaTime / _serializedData.MaxSpeedChangeDampTime);
 
                 // calculate the tangent on the surface following the rigid body's velocity direction...
-                Vector3 surfaceTangent = Vector3.ProjectOnPlane(RigidBody.velocity.normalized, surfaceNormal).normalized;
+                Vector3 surfaceTangent = Vector3.ProjectOnPlane(RigidBody.velocity.normalized, _lastSurfaceNormal).normalized;
 
                 // apply some kart motor effect to the rigid body's velocity...
                 RigidBody.velocity += surfaceTangent * Time.fixedDeltaTime * _serializedData.SpeedGainPerSecond;
                 RigidBody.velocity = Mathf.Clamp(RigidBody.velocity.magnitude, 0, _lastAllowedMaxSpeed) * RigidBody.velocity.normalized;
 
-                // apply some kart steering effect to the rigid body's velocity...
-                // from the steering angle, calculate the turning radius...
-                // Formula from: https://en.wikipedia.org/wiki/Turning_radius
-                float k1 = 1f; // wheelbase.
-                float k2 = 0f; // tire width;
-                float turningRadius = (k1 / Mathf.Sin(Mathf.Deg2Rad * _steeringAngle)) + (k2 / 2f);
-                
-                // from the turning radius, calculate the angular velocity and the instant angle change...
-                float angularVelocity = RigidBody.velocity.magnitude / turningRadius;
-                float rotationAngleDegrees = angularVelocity * Time.fixedDeltaTime * Mathf.Rad2Deg;
+                if (_steeringAngle != 0f)
+                {
+                    // apply some steering effect to the rigid body's velocity...
+                    // from the steering angle, calculate the turning radius using formula from: https://en.wikipedia.org/wiki/Turning_radius
+                    float k1 = 1f; // wheelbase.
+                    float k2 = 0f; // tire width;
+                    float turningRadius = (k1 / Mathf.Sin(Mathf.Deg2Rad * _steeringAngle)) + (k2 / 2f);
 
-                // finally, apply the steering effect to the velocity...
-                RigidBody.velocity = Quaternion.AngleAxis(rotationAngleDegrees, surfaceNormal) * RigidBody.velocity;
+                    // from the turning radius, calculate the angular velocity and then the angle to be used in this frame...
+                    float angularVelocity = RigidBody.velocity.magnitude / turningRadius;
+                    float rotationAngleDegrees = angularVelocity * Mathf.Rad2Deg * Time.fixedDeltaTime;
+                    RigidBody.velocity = Quaternion.AngleAxis(rotationAngleDegrees, _lastSurfaceNormal) * RigidBody.velocity;
+                }
             }
             else
             {
@@ -153,30 +184,35 @@ namespace MadKart
         {
             // update the steering angle, according to player input...
             float targetSteeringAngle = 0f;
+            bool steeringOn = false;
             if (Input.GetKey(KeyCode.A))
             {
+                steeringOn = true;
                 targetSteeringAngle = -_serializedData.MaxSteeringAngle;
             }
             else if (Input.GetKey(KeyCode.D))
             {
+                steeringOn = true;
                 targetSteeringAngle = _serializedData.MaxSteeringAngle;
             }
-            _steeringAngle = Mathf.Lerp(_steeringAngle, targetSteeringAngle, Time.deltaTime / _serializedData.SteeringAngleChangeDampTime);
+
+            float steeringDampTime = steeringOn ?
+                _serializedData.SteeringOnAngleChangeDampTime : _serializedData.SteeringOffAngleChangeDampTime;
+            _steeringAngle = Mathf.Lerp(_steeringAngle, targetSteeringAngle, Time.deltaTime / steeringDampTime);
 
             // calculate a smooth position for the kart visual...
-            Vector3 targetPosition = RigidBody.position + _lastRigidBodyToContactPoint;
+            Vector3 targetPosition = RigidBody.position - _lastSurfaceNormal * _serializedData.KartCollider.radius;
             _lastKartVisualPosition = Vector3.SmoothDamp(_lastKartVisualPosition, targetPosition, ref _smoothDampVelocity,
                 Time.deltaTime * _serializedData.KartVisualPositionChangeDampTime);
-            _serializedData.KartVisual.position = _lastKartVisualPosition;
+            _serializedData.KartVisualTopLevelTransform.position = _lastKartVisualPosition;
 
             // calculate a smooth rotation for the kart visual...
-            Vector3 targetUp = (-_lastRigidBodyToContactPoint).normalized;
-            Quaternion targetRotation = RigidBody.velocity == Vector3.zero ?
-                                            _lastKartVisualRotation :
-                                            Quaternion.LookRotation(RigidBody.velocity.normalized, targetUp);
-            _lastKartVisualRotation = Quaternion.Slerp(_lastKartVisualRotation, targetRotation,
+            _lastKartTargetVisualRotation = (RigidBody.velocity == Vector3.zero || !_isGrounded) ?
+                                            _lastKartTargetVisualRotation :
+                                            Quaternion.LookRotation(RigidBody.velocity.normalized, _lastSurfaceNormal);
+            _lastKartVisualRotation = Quaternion.Slerp(_lastKartVisualRotation, _lastKartTargetVisualRotation,
                 Time.deltaTime / _serializedData.KartVisualRotationChangeDampTime);
-            _serializedData.KartVisual.rotation = _lastKartVisualRotation;
+            _serializedData.KartVisualTopLevelTransform.rotation = _lastKartVisualRotation;
 
             // update the steering angle of the two front wheels...
             _serializedData.FrontLeftWheelSteering.localRotation = Quaternion.AngleAxis(_steeringAngle, Vector3.up);

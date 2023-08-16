@@ -296,8 +296,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2009156, y: 0.23033684, z: 0.12938967}
-  m_Center: {x: 0.53713936, y: 0.061651256, z: 0.18686609}
+  m_Size: {x: 1.2009156, y: 0.23033684, z: 0.15167299}
+  m_Center: {x: 0.53713936, y: 0.061651967, z: 0.19800775}
 --- !u!1 &2675406909479241981
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,8 +402,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2009156, y: 0.23033684, z: 0.12938967}
-  m_Center: {x: 0.53713936, y: 0.061651256, z: 0.18686609}
+  m_Size: {x: 1.2009156, y: 0.23033684, z: 0.14891362}
+  m_Center: {x: 0.53713936, y: 0.06165234, z: 0.17710412}
 --- !u!1 &2812033775253679953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,7 +1675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1401236379385505167
 Transform:
   m_ObjectHideFlags: 0
@@ -2365,7 +2365,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d8f9f1162ab50bf47a0f60d7d34bb167,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d8f9f1162ab50bf47a0f60d7d34bb167,
         type: 3}
@@ -2399,6 +2399,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4272115444254678477}
   m_SourcePrefab: {fileID: 100100000, guid: d8f9f1162ab50bf47a0f60d7d34bb167, type: 3}
+--- !u!64 &5143135885029614931 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 3451118302482216456, guid: d8f9f1162ab50bf47a0f60d7d34bb167,
+    type: 3}
+  m_PrefabInstance: {fileID: 7531358989876728667}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7225368956771577354 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d8f9f1162ab50bf47a0f60d7d34bb167,
@@ -2419,6 +2425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializedData:
     TileType: 12
+    RoadNonConvexMeshCollider: {fileID: 5143135885029614931}
 --- !u!4 &8002468159094355120 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d8f9f1162ab50bf47a0f60d7d34bb167,

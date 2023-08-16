@@ -40,7 +40,11 @@ namespace MadKart
             public float FrontWheelsRadius; // world space...
             public float BackWheelsRadius; // world space...
             public float KartVisualRotationChangeDampTime;
-            public float KartVisualPositionChangeDampTime;
+            public float KartVisualPositionChangeSmoothTime;
+
+            [Header("Temp debug")]
+            public ButtonTest TurnLeftButton;
+            public ButtonTest TurnRightButton;
         }
 
         [SerializeField] private SerializedData _serializedData;
@@ -126,7 +130,7 @@ namespace MadKart
                     }
                 }
 
-                Debug.Log((rigidBodyPosition - contactPoint).magnitude);
+                // Debug.Log((rigidBodyPosition - contactPoint).magnitude);
 
                 if ((rigidBodyPosition - contactPoint).magnitude > _serializedData.RadiusForOverlapSphere)
                 {
@@ -185,12 +189,12 @@ namespace MadKart
             // update the steering angle, according to player input...
             float targetSteeringAngle = 0f;
             bool steeringOn = false;
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || _serializedData.TurnLeftButton.IsPressed)
             {
                 steeringOn = true;
                 targetSteeringAngle = -_serializedData.MaxSteeringAngle;
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D) || _serializedData.TurnRightButton.IsPressed)
             {
                 steeringOn = true;
                 targetSteeringAngle = _serializedData.MaxSteeringAngle;
@@ -203,7 +207,7 @@ namespace MadKart
             // calculate a smooth position for the kart visual...
             Vector3 targetPosition = RigidBody.position - _lastSurfaceNormal * _serializedData.KartCollider.radius;
             _lastKartVisualPosition = Vector3.SmoothDamp(_lastKartVisualPosition, targetPosition, ref _smoothDampVelocity,
-                Time.deltaTime * _serializedData.KartVisualPositionChangeDampTime);
+                _serializedData.KartVisualPositionChangeSmoothTime);
             _serializedData.KartVisualTopLevelTransform.position = _lastKartVisualPosition;
 
             // calculate a smooth rotation for the kart visual...

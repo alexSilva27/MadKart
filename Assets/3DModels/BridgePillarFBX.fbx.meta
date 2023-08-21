@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d8f9f1162ab50bf47a0f60d7d34bb167
+guid: f0c25ebc936ed0f428472b859d47f3af
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,23 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: BlueDebug
-    second: {fileID: 2100000, guid: a1b72d026248d5947a9ed52c77c8806a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: OrangeDebug
-    second: {fileID: 2100000, guid: 16839285b26574d46b33f8fcb6af008f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: RedDebug
     second: {fileID: 2100000, guid: 06945ca272faa9843ac6cc4971042aa1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: YellowDebug
-    second: {fileID: 2100000, guid: 6fb5f9826eedab64fb9a24e630cc540c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -52,12 +37,12 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1

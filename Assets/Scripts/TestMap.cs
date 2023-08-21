@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.IO;
 using UnityEngine;
 
 namespace MadKart
@@ -9,7 +10,7 @@ namespace MadKart
 
         public void Start()
         {
-            //string mapJson = File.ReadAllText(Application.persistentDataPath + "/myFirstMap.json");
+            //string mapJson = File.ReadAllText(Application.persistentDataPath + "/testMap");
             string mapJson = Resources.Load<TextAsset>("Maps/testMap").text;
             Map map = JsonConvert.DeserializeObject<Map>(mapJson);
             map.Instantiate(_rootTransform);

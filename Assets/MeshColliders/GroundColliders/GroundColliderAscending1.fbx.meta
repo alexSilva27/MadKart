@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f0c25ebc936ed0f428472b859d47f3af
+guid: 40fe128ad79818e46a174696d5ea63f5
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: RedDebug
-    second: {fileID: 2100000, guid: 06945ca272faa9843ac6cc4971042aa1, type: 2}
+      name: YellowDebug
+    second: {fileID: 2100000, guid: 6fb5f9826eedab64fb9a24e630cc540c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -37,7 +37,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1

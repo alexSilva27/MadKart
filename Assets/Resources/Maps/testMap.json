@@ -12,8 +12,8 @@
     {
       "TileType": "BridgeStraight",
       "Position": {
-        "Item1": 1,
-        "Item2": 1,
+        "Item1": 3,
+        "Item2": 3,
         "Item3": -7
       },
       "Rotation": "Neutral"
@@ -419,6 +419,204 @@
       "Position": {
         "Item1": 2,
         "Item2": 1,
+        "Item3": -8
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgeAscending1",
+      "Position": {
+        "Item1": 1,
+        "Item2": 1,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgeAscending1",
+      "Position": {
+        "Item1": 2,
+        "Item2": 2,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 2,
+        "Item2": 1,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 3,
+        "Item2": 2,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 3,
+        "Item2": 1,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 3,
+        "Item2": 0,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillar",
+      "Position": {
+        "Item1": 3,
+        "Item2": -1,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgePillarWithBase",
+      "Position": {
+        "Item1": 3,
+        "Item2": -2,
+        "Item3": -7
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgeStraight",
+      "Position": {
+        "Item1": 2,
+        "Item2": 1,
+        "Item3": -7
+      },
+      "Rotation": "MinusNinetyDegrees"
+    },
+    {
+      "TileType": "BridgeStraight",
+      "Position": {
+        "Item1": 3,
+        "Item2": 1,
+        "Item3": -8
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgeSmallCurve",
+      "Position": {
+        "Item1": 4,
+        "Item2": 1,
+        "Item3": -7
+      },
+      "Rotation": "MinusNinetyDegrees"
+    },
+    {
+      "TileType": "BridgeSmallCurve",
+      "Position": {
+        "Item1": 4,
+        "Item2": 1,
+        "Item3": -8
+      },
+      "Rotation": "Neutral"
+    },
+    {
+      "TileType": "BridgeSmallCurve",
+      "Position": {
+        "Item1": 3,
+        "Item2": 1,
+        "Item3": -7
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgeAscending1",
+      "Position": {
+        "Item1": 3,
+        "Item2": 1,
+        "Item3": -6
+      },
+      "Rotation": "MinusNinetyDegrees"
+    },
+    {
+      "TileType": "BridgeStraight",
+      "Position": {
+        "Item1": 3,
+        "Item2": 2,
+        "Item3": -5
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgeAscending1",
+      "Position": {
+        "Item1": 3,
+        "Item2": 2,
+        "Item3": -4
+      },
+      "Rotation": "MinusNinetyDegrees"
+    },
+    {
+      "TileType": "BridgeSmallCurve",
+      "Position": {
+        "Item1": 3,
+        "Item2": 3,
+        "Item3": -3
+      },
+      "Rotation": "OneHundredEightyDegrees"
+    },
+    {
+      "TileType": "BridgeSmallCurve",
+      "Position": {
+        "Item1": 4,
+        "Item2": 3,
+        "Item3": -3
+      },
+      "Rotation": "MinusNinetyDegrees"
+    },
+    {
+      "TileType": "BridgeStraight",
+      "Position": {
+        "Item1": 4,
+        "Item2": 3,
+        "Item3": -4
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgeStraight",
+      "Position": {
+        "Item1": 4,
+        "Item2": 3,
+        "Item3": -5
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgeStraight",
+      "Position": {
+        "Item1": 4,
+        "Item2": 3,
+        "Item3": -6
+      },
+      "Rotation": "NinetyDegrees"
+    },
+    {
+      "TileType": "BridgeSmallCurve",
+      "Position": {
+        "Item1": 4,
+        "Item2": 3,
         "Item3": -7
       },
       "Rotation": "Neutral"

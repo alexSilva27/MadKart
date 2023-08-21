@@ -19,14 +19,15 @@ namespace MadKart
 
             // motor...
             public float MinSpeed;
-            public float MaxSpeedHorizontalSurface;
-            public float MaxSpeedVerticalSurface;
+
+            public AnimationCurve MaxSpeedDependingOnInclination;
             public float MaxSpeedChangeDampTime;
-            public float SpeedGainPerSecond;
+
+            public AnimationCurve SpeedGainPerSecondDependingOnInclination;
 
             // steering...
             public float MaxSteeringAngle;
-            public float SteeringOnAngleChangeDampTime;
+            public float SteeringOnAngularVelocity; // degrees per second...
             public float SteeringOffAngleChangeDampTime;
 
             [Header("Visual settings")]
@@ -65,6 +66,8 @@ namespace MadKart
 
         public Rigidbody RigidBody => _serializedData.RigidBody;
 
+        public Transform VisualTopTransform => _serializedData.KartVisualTopLevelTransform;
+
         #endregion
 
         #region Unity messages
@@ -76,7 +79,7 @@ namespace MadKart
             _smoothDampVelocity = Vector3.zero;
             _steeringAngle = 0f;
             _isGrounded = false;
-            _lastAllowedMaxSpeed = _serializedData.MaxSpeedHorizontalSurface;
+            _lastAllowedMaxSpeed = _serializedData.MaxSpeedDependingOnInclination.Evaluate(0.5f);
             _lastSurfaceNormal = Vector3.up;
             _lastKartVisualRotation = Quaternion.identity;
             _lastKartTargetVisualRotation = Quaternion.identity;
@@ -86,6 +89,7 @@ namespace MadKart
         private void FixedUpdate()
         {
             // make sure that the rigid body velocity is not zero.
+            // Debug.Log(_lastAllowedMaxSpeed);
             // Debug.Log(RigidBody.velocity.magnitude);
             if (RigidBody.velocity == Vector3.zero)
             {
@@ -112,8 +116,8 @@ namespace MadKart
                     if (collider is MeshCollider meshCollider && !meshCollider.convex)
                     {
                         // unity Collider.ClosesPoint() does not work for non convex mesh colliders; so we have implemented our own implementation...
-                        TileController tile = meshCollider.GetComponent<TileController>();
-                        MeshColliderData colliderData = tile.MeshColliderData;
+                        TileController tile = meshCollider.GetComponentInParent<TileController>();
+                        MeshColliderData colliderData = tile.GroundNonConvexMeshCollider;
                         colliderClosestPoint = colliderData.ClosestPoint(in rigidBodyPosition);
                     }
                     else
@@ -140,19 +144,27 @@ namespace MadKart
 
                 _lastSurfaceNormal = (rigidBodyPosition - contactPoint).normalized;
 
-                // depending on the surface normal, we have different max speeds...
-                float newAllowedMaxSpeedRatio = Mathf.Abs(Vector3.Cross(_lastSurfaceNormal, Vector3.up).magnitude);
-                float newAllowedMaxSpeed = Mathf.Lerp(_serializedData.MaxSpeedHorizontalSurface,
-                    _serializedData.MaxSpeedVerticalSurface, newAllowedMaxSpeedRatio);
-                _lastAllowedMaxSpeed = Mathf.Lerp(_lastAllowedMaxSpeed, newAllowedMaxSpeed,
-                    Time.fixedDeltaTime / _serializedData.MaxSpeedChangeDampTime);
-
                 // calculate the tangent on the surface following the rigid body's velocity direction...
                 Vector3 surfaceTangent = Vector3.ProjectOnPlane(RigidBody.velocity.normalized, _lastSurfaceNormal).normalized;
 
+                // calculate the inclination of the surface according to the surface tangent.
+                // the inclination of the surface will be used to calculate customs max speed and speed gain.
+                // X = 0 going down vertically.
+                // X = 0.5 on flat ground.
+                // X = 1 going up vertically.
+                float inclinationFactor = Vector3.Dot(surfaceTangent, Vector3.up); // - 1 to 1.
+                inclinationFactor = (inclinationFactor + 1f) / 2f; // remapped 0 to 1.
+                // Debug.Log(inclinationFactor);
+
+                float newAllowedMaxSpeed = _serializedData.MaxSpeedDependingOnInclination.Evaluate(inclinationFactor);
+                _lastAllowedMaxSpeed = Mathf.Lerp(_lastAllowedMaxSpeed, newAllowedMaxSpeed,
+                    Time.fixedDeltaTime / _serializedData.MaxSpeedChangeDampTime);
+
                 // apply some kart motor effect to the rigid body's velocity...
-                RigidBody.velocity += surfaceTangent * Time.fixedDeltaTime * _serializedData.SpeedGainPerSecond;
-                RigidBody.velocity = Mathf.Clamp(RigidBody.velocity.magnitude, 0, _lastAllowedMaxSpeed) * RigidBody.velocity.normalized;
+                float speedGainPerSecond = _serializedData.SpeedGainPerSecondDependingOnInclination.Evaluate(inclinationFactor);
+                // Debug.Log(speedGainPerSecond);
+                RigidBody.velocity += surfaceTangent * Time.fixedDeltaTime * speedGainPerSecond;
+                RigidBody.velocity = Mathf.Min(RigidBody.velocity.magnitude, _lastAllowedMaxSpeed) * RigidBody.velocity.normalized;
 
                 if (_steeringAngle != 0f)
                 {
@@ -187,22 +199,20 @@ namespace MadKart
         private void UpdateKartVisual()
         {
             // update the steering angle, according to player input...
-            float targetSteeringAngle = 0f;
-            bool steeringOn = false;
             if (Input.GetKey(KeyCode.A) || _serializedData.TurnLeftButton.IsPressed)
             {
-                steeringOn = true;
-                targetSteeringAngle = -_serializedData.MaxSteeringAngle;
+                _steeringAngle -= _serializedData.SteeringOnAngularVelocity * Time.deltaTime;
+                _steeringAngle = Mathf.Max(_steeringAngle, -_serializedData.MaxSteeringAngle);
             }
             else if (Input.GetKey(KeyCode.D) || _serializedData.TurnRightButton.IsPressed)
             {
-                steeringOn = true;
-                targetSteeringAngle = _serializedData.MaxSteeringAngle;
+                _steeringAngle += _serializedData.SteeringOnAngularVelocity * Time.deltaTime;
+                _steeringAngle = Mathf.Min(_steeringAngle, _serializedData.MaxSteeringAngle);
             }
-
-            float steeringDampTime = steeringOn ?
-                _serializedData.SteeringOnAngleChangeDampTime : _serializedData.SteeringOffAngleChangeDampTime;
-            _steeringAngle = Mathf.Lerp(_steeringAngle, targetSteeringAngle, Time.deltaTime / steeringDampTime);
+            else
+            {
+                _steeringAngle = Mathf.Lerp(_steeringAngle, 0f, Time.deltaTime / _serializedData.SteeringOffAngleChangeDampTime);
+            }
 
             // calculate a smooth position for the kart visual...
             Vector3 targetPosition = RigidBody.position - _lastSurfaceNormal * _serializedData.KartCollider.radius;

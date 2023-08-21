@@ -1,24 +1,9 @@
 fileFormatVersion: 2
-guid: f7757b3a09f41c74eb0dcbf54cc48a82
+guid: a4a794953f5520f46a79b0c2d38a5970
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BlueDebug
-    second: {fileID: 2100000, guid: a1b72d026248d5947a9ed52c77c8806a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: OrangeDebug
-    second: {fileID: 2100000, guid: 16839285b26574d46b33f8fcb6af008f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: RedDebug
-    second: {fileID: 2100000, guid: 06945ca272faa9843ac6cc4971042aa1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

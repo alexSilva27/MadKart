@@ -9,7 +9,7 @@ namespace MadKart
         private struct SerializedData
         {
             public TileType TileType;
-            public MeshCollider RoadNonConvexMeshCollider;
+            public MeshCollider GroundNonConvexMeshCollider;
         }
 
         [SerializeField]
@@ -73,13 +73,13 @@ namespace MadKart
                 Vector3 rotationPivot = transform.TransformPoint(new Vector3(0.5f, 0f, 0.5f));
                 transform.RotateAround(rotationPivot, transform.up, angle);
 
-                if (_serializedData.RoadNonConvexMeshCollider != null)
+                if (_serializedData.GroundNonConvexMeshCollider != null)
                 {
-                    MeshColliderData = new MeshColliderData(_serializedData.RoadNonConvexMeshCollider);
+                    GroundNonConvexMeshCollider = new MeshColliderData(_serializedData.GroundNonConvexMeshCollider);
                 }
             }
         }
 
-        public MeshColliderData MeshColliderData { get; private set; }
+        public MeshColliderData GroundNonConvexMeshCollider { get; private set; }
     }
 }

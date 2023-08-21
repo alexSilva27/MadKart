@@ -9,7 +9,7 @@ PhysicsManager:
   m_BounceThreshold: 2
   m_DefaultMaxDepenetrationVelocity: 10
   m_SleepThreshold: 0
-  m_DefaultContactOffset: 0.00001
+  m_DefaultContactOffset: 1e-10
   m_DefaultSolverIterations: 36
   m_DefaultSolverVelocityIterations: 6
   m_QueriesHitBackfaces: 0
@@ -36,4 +36,4 @@ PhysicsManager:
   m_EnableUnifiedHeightmaps: 1
   m_ImprovedPatchFriction: 0
   m_SolverType: 0
-  m_DefaultMaxAngularSpeed: 50
+  m_DefaultMaxAngularSpeed: 10000

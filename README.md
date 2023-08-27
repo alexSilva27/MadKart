@@ -1,6 +1,6 @@
 # MadKart
 
-A sample unity project to help you to get started building a mobile kart or car game. 
+A sample unity 2022 LTS project to help you to get started building a mobile kart or car game. 
 
 ## Key points:
 

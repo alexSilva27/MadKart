@@ -1,6 +1,6 @@
 # MadKart
 
-A sample unity 2022 LTS project to help you to get started building a mobile kart or car game.
+A sample unity 2022 LTS project to help you to get started building a mobile arcade kart game.
 
 ![screenshot1](https://github.com/alexSilva27/MadKart/blob/master/Prints/print1.png?raw=true)
 ![screenshot2](https://github.com/alexSilva27/MadKart/blob/master/Prints/print2.png?raw=true)
@@ -8,7 +8,7 @@ A sample unity 2022 LTS project to help you to get started building a mobile kar
 
 ## Key points:
 
-1. A kart controller based on a sphere-shaped non-kinematic rigid body (so no wheel colliders or other type of colliders are used).
+1. An arcade kart controller based on a sphere-shaped non-kinematic rigid body (so no wheel colliders or other type of colliders are used).
 2. A tile-based track system. A track is made of several tiles assembled together. All tiles have the same size (1f x 1f) and can be rotated by increments of 90 degrees.
 3. A simple camera follow controller.
 4. A blender file where you can see on how to create more tiles following a non destructive workflow approach by using geometry nodes and other type of modifiers. 

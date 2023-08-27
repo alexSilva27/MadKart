@@ -1,6 +1,6 @@
 # MadKart
 
-A sample unity 2022 LTS project to help you to get started building a mobile arcade kart game.
+A sample unity 2022 LTS project to help you get started building a mobile arcade kart game.
 
 ![screenshot1](https://github.com/alexSilva27/MadKart/blob/master/Prints/print1.png?raw=true)
 ![screenshot2](https://github.com/alexSilva27/MadKart/blob/master/Prints/print2.png?raw=true)
